@@ -1,0 +1,566 @@
+#include "SignalStrengthsSortedCuda.h"
+
+#include "CellPhoneCoverage.h"
+#include "CudaArray.h"
+#include "Helpers.h"
+
+#include <iostream>
+using namespace std;
+
+// "Smart" CUDA implementation which computes signal strengths
+//
+// First, all transmitters are sorted into buckets
+// Then, all receivers are sorted into buckets
+// Then, receivers only compute signal strength against transmitters in nearby buckets
+//
+// This multi-step algorithm makes the signal strength computation scale much
+//  better to high number of transmitters/receivers
+
+struct Bucket
+{
+	int startIndex; // Start of bucket within array
+	int numElements; // Number of elements in bucket
+};
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+//
+// No-operation sorting kernel
+//
+// This takes in an unordered set, and builds a dummy bucket representation around it
+// It does not perform any actual sorting!
+//
+// This kernel must be launched with a 1,1 configuration (1 grid block, 1 thread).
+
+static __global__ void noSortKernel(const Position* inputPositions,
+		int numInputPositions, Position* outputPositions, Bucket* outputBuckets)
+{
+	int numBuckets = BucketsPerAxis * BucketsPerAxis;
+
+	// Copy contents of input positions into output positions
+
+	for (int i = 0; i < numInputPositions; ++i)
+		outputPositions[i] = inputPositions[i];
+
+	// Set up the set of buckets to cover the output positions evenly
+
+	for (int i = 0; i < numBuckets; i++)
+	{
+		Bucket& bucket = outputBuckets[i];
+
+		bucket.startIndex = numInputPositions * i / numBuckets;
+		bucket.numElements = (numInputPositions * (i + 1) / numBuckets)
+				- bucket.startIndex;
+	}
+}
+
+static __global__ void histogramKernel(const Position* inputPositions,
+		int numInputPositions, int* histogram, float xbinWidth, float ybinWidth, float xmin, float ymin,
+		Position* cudaBucketTemp/*, int *a*/)
+{
+	int index = blockIdx.x * blockDim.x + threadIdx.x;
+
+	if (index < numInputPositions) {
+		int binx = (int)((inputPositions[index].x-xmin) / xbinWidth);
+		int biny = (int)((inputPositions[index].y-ymin) / ybinWidth);
+//		printf("Values X: pos: %f binf: %f bin: %d\n", inputPositions[index].x, (inputPositions[index].x-xmin) / xbinWidth, binx);
+//		printf("Values Y: pos: %f binf: %f bin: %d\n", inputPositions[index].y, (inputPositions[index].y-ymin) / ybinWidth, biny);
+		// TODO: maybe use shared memory
+
+		cudaBucketTemp[index].x = binx * BucketsPerAxis + biny;
+		cudaBucketTemp[index].y = histogram[binx * BucketsPerAxis + biny];
+		//printf("before: %d %d\n", binx * BucketsPerAxis + biny, histogram[binx * BucketsPerAxis + biny]);
+		atomicAdd(&(histogram[binx * BucketsPerAxis + biny]), 1);
+		//printf("after: %d %d\n", binx * BucketsPerAxis + biny, histogram[binx * BucketsPerAxis + biny]);
+		//atomicAdd(a,1);
+	}
+}
+
+__global__ void reduceKernel(int *_src) {
+	extern __shared__ int partialSum[];
+	unsigned int t = threadIdx.x;
+
+	// remove multiblock?
+	partialSum[t] = _src[/*blockIdx.x*blockDim.x+*/t];
+	for (unsigned int s = 1; s <= BucketsPerAxis*BucketsPerAxis/2; s <<= 1) {
+		__syncthreads();
+		if ((t+1)%(s*2) == 0) {
+			partialSum[t] = partialSum[t] + partialSum[t-s];
+		}
+	}
+	__syncthreads();
+	// TODO: in place?
+	// remove multiblock?
+	_src[t] = partialSum[t];
+}
+
+__global__ void prefixKernel(int *_src) {
+	extern __shared__ int partialSum[];
+	unsigned int t = threadIdx.x;
+
+	// remove multiblock?
+	partialSum[t] = _src[/*blockIdx.x*blockDim.x+*/t];
+
+	for (unsigned int s = BucketsPerAxis*BucketsPerAxis; s > 1; s >>= 1) {
+		__syncthreads();
+		if ((t+1) == s/2) {
+			partialSum[t] = partialSum[t] + 0; // T
+		}
+		else if (t+1-s/2 > 0 && (t+1-s/2) % s == 0) {
+			partialSum[t] = partialSum[t] + partialSum[t-s/2];
+		}
+	}
+	__syncthreads();
+	// remove multiblock?
+	_src[/*blockIdx.x*blockDim.x+*/t] = partialSum[t];
+}
+
+static __global__ void xmaxKernel(float *out, const Position* inputPositions, const int size)
+{
+	extern __shared__ float tmp[];
+	unsigned int t = threadIdx.x;
+
+	if (blockDim.x*blockIdx.x+t < size) {
+		int stride = blockDim.x / 2;
+
+		tmp[t] = inputPositions[blockDim.x*blockIdx.x+t].x;
+//		printf("tmp[t]=%f\n", tmp[t]);
+
+		if (stride * 2 < blockDim.x) {
+			if (tmp[t] < tmp[t+stride]) {
+				tmp[t] = tmp[t+stride];
+			}
+			tmp[stride+1] = tmp[blockDim.x-1];
+			stride >>= 1;
+		}
+
+//		printf("---> %f - %f\n", tmp[t], inputPositions[blockDim.x*blockIdx.x+t].x);
+		for (; stride >= 1; stride >>= 1) {
+			__syncthreads();
+//			printf("----->%d %d\n", t, stride);
+			if (t < stride && tmp[t] < tmp[t+stride]) {
+//				printf("~~~~~> %f - %f\n", tmp[t], tmp[t+stride]);
+				tmp[t] = tmp[t+stride];
+			}
+		}
+
+		__syncthreads();
+
+//		printf("--------> %f\n", tmp[0]);
+		out[blockIdx.x] = tmp[0];
+//		printf("Block: %d Thread: %d Value: %f\n", blockIdx.x, t, out[blockIdx.x]);
+
+
+	}
+}
+static __global__ void xminKernel(float *out, const Position* inputPositions, const int size)
+{
+	extern __shared__ float tmp[];
+	unsigned int t = threadIdx.x;
+//	printf("--------------->");
+	if (blockDim.x*blockIdx.x+t < size) {
+		tmp[t] = inputPositions[blockDim.x*blockIdx.x+t].x;
+
+//		printf("---> %f - %f\n", tmp[t], inputPositions[blockDim.x*blockIdx.x+t].x);
+		for (unsigned int stride = blockDim.x/2; stride >= 1; stride >>= 1) {
+			__syncthreads();
+			if (t < stride && tmp[t] > tmp[t+stride]) {
+//				printf("-----> %f - %f\n", tmp[t], tmp[t+stride]);
+				tmp[t] = tmp[t+stride];
+			}
+		}
+		__syncthreads();
+//		printf("--------> %f\n", tmp[0]);
+		out[blockIdx.x] = tmp[0];
+	}
+}
+static __global__ void ymaxKernel(float *out, const Position* inputPositions, const int size)
+{
+	extern __shared__ float tmp[];
+	unsigned int t = threadIdx.x;
+
+	if (blockDim.x*blockIdx.x+t < size) {
+		int stride = blockDim.x / 2;
+		tmp[t] = inputPositions[blockDim.x*blockIdx.x+t].y;
+
+		if (stride * 2 < blockDim.x) {
+			if (tmp[t] < tmp[t+stride]) {
+				tmp[t] = tmp[t+stride];
+			}
+			tmp[stride+1] = tmp[blockDim.x-1];
+			stride >>= 1;
+		}
+
+		for (; stride >= 1; stride >>= 1) {
+			__syncthreads();
+			if (t < stride && tmp[t] < tmp[t+stride])
+				tmp[t] = tmp[t+stride];
+		}
+		__syncthreads();
+		out[blockIdx.x] = tmp[0];
+	}
+}
+static __global__ void yminKernel(float *out, const Position* inputPositions, const int size)
+{
+	extern __shared__ float tmp[];
+	unsigned int t = threadIdx.x;
+
+	if (blockDim.x*blockIdx.x+t < size) {
+		tmp[t] = inputPositions[blockDim.x*blockIdx.x+t].y;
+
+		for (unsigned int stride = blockDim.x/2; stride >= 1; stride >>= 1) {
+			__syncthreads();
+			if (t < stride && tmp[t] > tmp[t+stride])
+				tmp[t] = tmp[t+stride];
+		}
+		__syncthreads();
+		out[blockIdx.x] = tmp[0];
+	}
+}
+static __global__ void maxKernelReduce(float *out, const float *gpuResult, const int size)
+{
+	extern __shared__ float tmp[];
+	unsigned int t = threadIdx.x;
+	//printf("LA%d\n",blockDim.x/2);
+	if (blockDim.x*blockIdx.x+t < size) {
+		tmp[t] = gpuResult[blockDim.x*blockIdx.x+t];
+//		printf("~~~~ %d %d %f\n", t, blockDim.x*blockIdx.x+t, gpuResult[blockDim.x*blockIdx.x+t]);
+
+		for (unsigned int stride = blockDim.x/2; stride >= 1; stride >>= 1) {
+			__syncthreads();
+
+			if (t < stride && tmp[t] < tmp[t+stride]) {
+				//printf("-----> %f - %f\n", tmp[t], tmp[t+stride]);
+				tmp[t] = tmp[t+stride];
+			}
+		}
+		__syncthreads();
+//		printf("sec-------->%d %d %d %f\n", size, t, blockDim.x*blockIdx.x+t, tmp[0]);
+		out[blockIdx.x] = tmp[0];
+	}
+}
+static __global__ void minKernelReduce(float *out, const float *gpuResult, const int size)
+{
+	extern __shared__ float tmp[];
+	unsigned int t = threadIdx.x;
+
+	if (blockDim.x*blockIdx.x+t < size) {
+		tmp[t] = gpuResult[blockDim.x*blockIdx.x+t];
+
+		for (unsigned int stride = blockDim.x/2; stride >= 1; stride >>= 1) {
+			__syncthreads();
+			if (t < stride && tmp[t] > tmp[t+stride])
+				tmp[t] = tmp[t+stride];
+		}
+		__syncthreads();
+		out[blockIdx.x] = tmp[0];
+	}
+}
+
+// !!! missing !!!
+// Kernels needed for sortPositionsIntoBuckets(...)
+// C) Part
+///////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Sort a set of positions into a set of buckets
+//
+// Given a set of input positions, these will be re-ordered such that
+//  each range of elements in the output array belong to the same bucket.
+// The list of buckets that is output describes where each such range begins
+//  and ends in the re-ordered position array.
+
+static void sortPositionsIntoBuckets(CudaArray<Position>& cudaInputPositions,
+		CudaArray<Position>& cudaOutputPositions,
+		CudaArray<Bucket>& cudaOutputPositionBuckets)
+{
+	// Bucket sorting with "Counting Sort" is a multi-phase process:
+	//
+	// 1. Determine how many of the input elements should end up in each bucket (build a histogram)
+	//
+	// 2. Given the histogram, compute where in the output array that each bucket begins, and how large it is
+	//    (perform prefix summation over the histogram)
+	//
+	// 3. Given the start of each bucket within the output array, scatter elements from the input
+	//    array into the output array
+	//
+	// Your new sort implementation should be able to handle at least 10 million entries, and
+	//  run in reasonable time (the reference implementations does the job in less than 5 seconds).
+
+	//=================  Your code here =====================================
+	// !!! missing !!!
+
+	// Instead of sorting, we will now run a dummy kernel that just duplicates the
+	//  output positions, and constructs a set of dummy buckets. This is just so that
+	//  the test program will not crash when you try to run it.
+	//
+	// This kernel is run single-threaded because it is throw-away code where performance
+	//  does not matter; after all, the purpose of the lab is to replace it with a
+	//  proper sort algorithm instead!
+
+	//=========== Remove this code when you begin to implement your own sorting algorithm =================
+
+//	noSortKernel<<<1, 1>>>(cudaInputPositions.cudaArray(),
+//			cudaInputPositions.size(), cudaOutputPositions.cudaArray(),
+//			cudaOutputPositionBuckets.cudaArray());
+	int numThreads = std::min(cudaInputPositions.size(), 256);
+	int numBlocks = (cudaInputPositions.size() + numThreads - 1) / numThreads;
+
+	int numThreadsReduce = std::min(numBlocks, 256);
+	int numBlocksReduce = (numBlocks + numThreadsReduce - 1) / numThreadsReduce;
+
+	float* cpuResult;
+	cudaMallocHost((void**) &cpuResult, numBlocks * sizeof(float));
+	float xcpuMin, xcpuMax, ycpuMin, ycpuMax;
+//	cudaMallocHost((void**) &xcpuMin, sizeof(float));
+//	cudaMallocHost((void**) &xcpuMax, sizeof(float));
+//	cudaMallocHost((void**) &ycpuMin, sizeof(float));
+//	cudaMallocHost((void**) &ycpuMax, sizeof(float));
+
+	float* gpuResult;
+	float* xgpuMin, *xgpuMax, *ygpuMin, *ygpuMax;
+	cudaMallocHost((void**) &gpuResult, numBlocks * sizeof(float));
+	cudaMallocHost((void**) &xgpuMin, sizeof(float));
+	cudaMallocHost((void**) &xgpuMax, sizeof(float));
+	cudaMallocHost((void**) &ygpuMin, sizeof(float));
+	cudaMallocHost((void**) &ygpuMax, sizeof(float));
+
+	printf("_________ %d\n", numThreadsReduce);
+	fflush(stdout);
+	xminKernel<<<numBlocks, numThreads, numThreads*sizeof(float)>>>(gpuResult, cudaInputPositions.cudaArray(),
+			cudaInputPositions.size());
+	minKernelReduce<<<numBlocksReduce, numThreadsReduce, numThreadsReduce*sizeof(float)>>>(xgpuMin, gpuResult,
+			numBlocks);
+
+	xmaxKernel<<<numBlocks, numThreads, numThreads*sizeof(float)>>>(gpuResult, cudaInputPositions.cudaArray(),
+			cudaInputPositions.size());
+	maxKernelReduce<<<numBlocksReduce, numThreadsReduce, numThreadsReduce*sizeof(float)>>>(xgpuMax, gpuResult,
+			numBlocks);
+
+//	cudaDeviceSynchronize();
+//	cudaMemcpy(cpuResult, gpuResult, numBlocks * sizeof(float), cudaMemcpyDeviceToHost);
+//	for (int i = 0; i < numBlocks; i++)
+//		printf("%d - %f\n", i, cpuResult[i]);
+//	printf("\n");
+//	fflush(stdout);
+//	cudaMemcpy(xcpuMax, xgpuMax, sizeof(float), cudaMemcpyDeviceToHost);
+//	printf("-------------------->x: %f", *xcpuMax);
+	yminKernel<<<numBlocks, numThreads, numThreads*sizeof(float)>>>(gpuResult, cudaInputPositions.cudaArray(),
+			cudaInputPositions.size());
+	minKernelReduce<<<numBlocksReduce, numThreadsReduce, numThreadsReduce*sizeof(float)>>>(ygpuMin, gpuResult,
+			numBlocks);
+
+	ymaxKernel<<<numBlocks, numThreads, numThreads*sizeof(float)>>>(gpuResult, cudaInputPositions.cudaArray(),
+			cudaInputPositions.size());
+	maxKernelReduce<<<numBlocksReduce, numThreadsReduce, numThreadsReduce*sizeof(float)>>>(ygpuMax, gpuResult,
+			numBlocks);
+
+	cudaDeviceSynchronize();
+
+
+	cudaMemcpy(&xcpuMin, xgpuMin, sizeof(float), cudaMemcpyDeviceToHost);
+	cudaMemcpy(&xcpuMax, xgpuMax, sizeof(float), cudaMemcpyDeviceToHost);
+	cudaMemcpy(&ycpuMin, ygpuMin, sizeof(float), cudaMemcpyDeviceToHost);
+	cudaMemcpy(&ycpuMax, ygpuMax, sizeof(float), cudaMemcpyDeviceToHost);
+	printf("X: min: %f max:%f\nY: min: %f max: %f\n", xcpuMin, xcpuMax, ycpuMin, ycpuMax);
+	fflush(stdout);
+
+	float xbinWidth = (xcpuMax+0.0000001 - xcpuMin) / BucketsPerAxis;
+	float ybinWidth = (ycpuMax+0.0000001 - ycpuMin) / BucketsPerAxis;
+
+	printf("X bin width: %f\ny bin width: %f\n", xbinWidth, ybinWidth);
+	fflush(stdout);
+	// histograms el no
+	int noElements = BucketsPerAxis * BucketsPerAxis;
+	// initialize histogram to 0s
+	int cpuHistogram[noElements] = {0};
+	CudaArray<int> cudaHistogram(noElements);
+	cudaHistogram.copyToCuda(cpuHistogram);
+
+	int a = 0;
+	int *gpuA;
+	cudaMallocHost((void**) &gpuA, sizeof(a));
+
+	int cpuInputPositions[cudaInputPositions.size()] = {0};
+	CudaArray<Position> cudaBucketTemp(cudaInputPositions.size());
+	//cudaBucketTemp.copyToCuda(cpuInputPosisions);
+
+	histogramKernel<<<numBlocks, numThreads>>>(cudaInputPositions.cudaArray(),
+				cudaInputPositions.size(), cudaHistogram.cudaArray(), xbinWidth, ybinWidth, *xgpuMin, *ygpuMin,
+				cudaBucketTemp.cudaArray()/*, gpuA*/);
+
+	cudaDeviceSynchronize();
+	cudaMemcpy(cpuInputPositions, cudaBucketTemp, cudaBucketTemp.size()*sizeof(Position), cudaMemcpyDeviceToHost);
+	cudaMemcpy(cpuHistogram, cudaHistogram.cudaArray(), noElements*sizeof(int), cudaMemcpyDeviceToHost);
+
+	int sum = 0;
+	printf("no els: %d\n", noElements);
+	for (int i = 0; i < noElements; i++) {
+		sum += cpuHistogram[i];
+		printf("%d ", cpuHistogram[i]);
+	}
+
+	printf("\n\n\n");
+
+//	cudaMemcpy(&a, gpuA, sizeof(int), cudaMemcpyDeviceToHost);
+	printf("\nsum %d\n", sum);
+//	printf("\na %d\n", a);
+
+	reduceKernel<<<1, BucketsPerAxis*BucketsPerAxis, BucketsPerAxis*BucketsPerAxis*sizeof(int)>>>(cudaHistogram.cudaArray());
+	cudaMemcpy(cpuHistogram, cudaHistogram.cudaArray(), noElements*sizeof(int), cudaMemcpyDeviceToHost);
+	printf("Reduced:\n");
+	for (int i = 0; i < noElements; i++)
+		printf("%d ", cpuHistogram[i]);
+
+	printf("\n\n\n");
+
+	prefixKernel<<<1, BucketsPerAxis*BucketsPerAxis, BucketsPerAxis*BucketsPerAxis*sizeof(int)>>>(cudaHistogram.cudaArray());
+	cudaMemcpy(cpuHistogram, cudaHistogram.cudaArray(), noElements*sizeof(int), cudaMemcpyDeviceToHost);
+	printf("Spreaded:\n");
+	for (int i = 0; i < noElements; i++)
+		printf("%d ", cpuHistogram[i]);
+
+	cudaDeviceSynchronize();
+
+	exit(1);
+
+
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Go through all transmitters in one bucket, find highest signal strength
+// Return highest strength (or the old value, if that was higher)
+
+static __device__ float scanBucket(const Position* transmitters,
+		int numTransmitters, const Position& receiver, float bestSignalStrength)
+{
+	for (int transmitterIndex = 0; transmitterIndex < numTransmitters;
+			++transmitterIndex)
+	{
+		const Position& transmitter = transmitters[transmitterIndex];
+
+		float strength = signalStrength(transmitter, receiver);
+
+		if (bestSignalStrength < strength)
+			bestSignalStrength = strength;
+	}
+
+	return bestSignalStrength;
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+//
+// Calculate signal strength for all receivers
+
+static __global__ void calculateSignalStrengthsSortedKernel(
+		const Position* transmitters, const Bucket* transmitterBuckets,
+		const Position* receivers, const Bucket* receiverBuckets,
+		float* signalStrengths)
+{
+	// Determine which bucket the current grid block is processing
+
+	int receiverBucketIndexX = blockIdx.x;
+	int receiverBucketIndexY = blockIdx.y;
+
+	int receiverBucketIndex = receiverBucketIndexY * BucketsPerAxis
+			+ receiverBucketIndexX;
+
+	const Bucket& receiverBucket = receiverBuckets[receiverBucketIndex];
+
+	int receiverStartIndex = receiverBucket.startIndex;
+	int numReceivers = receiverBucket.numElements;
+
+	// Distribute available receivers over the set of available threads
+
+	for (int receiverIndex = threadIdx.x; receiverIndex < numReceivers;
+			receiverIndex += blockDim.x)
+	{
+		// Locate current receiver within the current bucket
+
+		const Position& receiver = receivers[receiverStartIndex + receiverIndex];
+		float& finalStrength = signalStrengths[receiverStartIndex
+				+ receiverIndex];
+
+		float bestSignalStrength = 0.f;
+
+		// Scan all buckets in the 3x3 region enclosing the receiver's bucket index
+
+		for (int transmitterBucketIndexY = receiverBucketIndexY - 1;
+				transmitterBucketIndexY < receiverBucketIndexY + 2;
+				++transmitterBucketIndexY)
+			for (int transmitterBucketIndexX = receiverBucketIndexX - 1;
+					transmitterBucketIndexX < receiverBucketIndexX + 2;
+					++transmitterBucketIndexX)
+			{
+				// Only process bucket if its index is within [0, BucketsPerAxis - 1] along each axis
+
+				if (transmitterBucketIndexX >= 0
+						&& transmitterBucketIndexX < BucketsPerAxis
+						&& transmitterBucketIndexY >= 0
+						&& transmitterBucketIndexY < BucketsPerAxis)
+				{
+					// Scan bucket for a potential new "highest signal strength"
+
+					int transmitterBucketIndex = transmitterBucketIndexY
+							* BucketsPerAxis + transmitterBucketIndexX;
+					int transmitterStartIndex =
+							transmitterBuckets[transmitterBucketIndex].startIndex;
+					int numTransmitters =
+							transmitterBuckets[transmitterBucketIndex].numElements;
+					bestSignalStrength = scanBucket(
+							&transmitters[transmitterStartIndex],
+							numTransmitters, receiver, bestSignalStrength);
+				}
+			}
+
+		// Store out the highest signal strength found for the receiver
+
+		finalStrength = bestSignalStrength;
+	}
+}
+
+///////////////////////////////////////////////////////////////////////////////////////////////
+
+void calculateSignalStrengthsSortedCuda(const PositionList& cpuTransmitters,
+		const PositionList& cpuReceivers,
+		SignalStrengthList& cpuSignalStrengths)
+{
+	int numBuckets = BucketsPerAxis * BucketsPerAxis;
+
+	// Copy input positions to device memory
+
+	CudaArray<Position> cudaTempTransmitters(cpuTransmitters.size());
+	cudaTempTransmitters.copyToCuda(&(*cpuTransmitters.begin()));
+
+	CudaArray<Position> cudaTempReceivers(cpuReceivers.size());
+	cudaTempReceivers.copyToCuda(&(*cpuReceivers.begin()));
+
+	// Allocate device memory for sorted arrays
+
+	CudaArray<Position> cudaTransmitters(cpuTransmitters.size());
+	CudaArray<Bucket> cudaTransmitterBuckets(numBuckets);
+
+	CudaArray<Position> cudaReceivers(cpuReceivers.size());
+	CudaArray<Bucket> cudaReceiverBuckets(numBuckets);
+
+	// Sort transmitters and receivers into buckets
+
+	sortPositionsIntoBuckets(cudaTempTransmitters, cudaTransmitters,
+			cudaTransmitterBuckets);
+	sortPositionsIntoBuckets(cudaTempReceivers, cudaReceivers,
+			cudaReceiverBuckets);
+
+	// Perform signal strength computation
+	CudaArray<float> cudaSignalStrengths(cpuReceivers.size());
+
+	int numThreads = 256;
+	dim3 grid = dim3(BucketsPerAxis, BucketsPerAxis);
+
+	calculateSignalStrengthsSortedKernel<<<grid, numThreads>>>(
+			cudaTransmitters.cudaArray(), cudaTransmitterBuckets.cudaArray(),
+			cudaReceivers.cudaArray(), cudaReceiverBuckets.cudaArray(),
+			cudaSignalStrengths.cudaArray());
+
+	// Copy results back to host memory
+	cpuSignalStrengths.resize(cudaSignalStrengths.size());
+	cudaSignalStrengths.copyFromCuda(&(*cpuSignalStrengths.begin()));
+}

@@ -1,0 +1,6 @@
+19:41:49 **** Incremental Build of configuration Default for project CellPhoneCoverage ****
+make dbg=1 all 
+make: Nothing to be done for 'all'.
+
+19:41:49 Build Finished (took 56ms)
+

@@ -1,0 +1,468 @@
+14:14:59 **** Incremental Build of configuration Debug for project CenterSurroundLayer ****
+make all 
+Building file: ../center_surround_convolution.cu
+Invoking: NVCC Compiler
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc -I/local/var/tmp/env/lib/python3.6/site-packages/torch/include -I/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include -I/local/var/tmp/env/lib/python3.6/site-packages/torch/include/TH -I/local/var/tmp/env/lib/python3.6/site-packages/torch/include/THC -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/usr/include/python3.6m -G -g -O0 -gencode arch=compute_35,code=sm_35  -odir "." -M -o "center_surround_convolution.d" "../center_surround_convolution.cu"
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc -I/local/var/tmp/env/lib/python3.6/site-packages/torch/include -I/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include -I/local/var/tmp/env/lib/python3.6/site-packages/torch/include/TH -I/local/var/tmp/env/lib/python3.6/site-packages/torch/include/THC -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/usr/include/python3.6m -G -g -O0 --compile --relocatable-device-code=false -gencode arch=compute_35,code=compute_35 -gencode arch=compute_35,code=sm_35  -x cu -o  "center_surround_convolution.o" "../center_surround_convolution.cu"
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/ArrayRef.h(278): warning: attribute does not apply to any entity
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/core/TensorTypeSet.h(44): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(14): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(15): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(15): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(15): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(18): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(19): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(19): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(19): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(23): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(24): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(24): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(24): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/profiler.h(97): warning: attribute "__visibility__" does not apply here
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/profiler.h(112): warning: attribute "__visibility__" does not apply here
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/ArrayRef.h(278): warning: attribute does not apply to any entity
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/core/TensorTypeSet.h(44): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(14): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(15): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(15): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(15): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(18): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(19): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(19): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(19): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(23): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(24): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(24): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/api/include/torch/nn/functional/padding.h(24): warning: integer conversion resulted in a change of sign
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/profiler.h(97): warning: attribute "__visibility__" does not apply here
+
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/profiler.h(112): warning: attribute "__visibility__" does not apply here
+
+../center_surround_convolution.cu: In lambda function:
+../center_surround_convolution.cu:131:94: warning: ‘c10::ScalarType detail::scalar_type(const at::DeprecatedTypeProperties&)’ is deprecated: passing at::DeprecatedTypeProperties to an AT_DISPATCH macro is deprecated, pass an at::ScalarType instead [-Wdeprecated-declarations]
+   AT_DISPATCH_FLOATING_TYPES(
+                                                                                              ^
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/Dispatch.h:31:1: note: declared here
+ inline at::ScalarType scalar_type(const at::DeprecatedTypeProperties &t) {
+ ^~~~~~~~~~~
+Finished building: ../center_surround_convolution.cu
+ 
+Building target: CenterSurroundLayer
+Invoking: NVCC Linker
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_35,code=compute_35 -gencode arch=compute_35,code=sm_35 -link -o  "CenterSurroundLayer"  ./center_surround_convolution.o  ./src/CenterSurroundLayer.o   
+./center_surround_convolution.o: In function `c10::tensorTypeIdToBackend(c10::TensorTypeId)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/core/Backend.h:106: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `c10::backendToDeviceType(c10::Backend)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/core/Backend.h:168: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/core/Backend.h:170: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `c10::typeMetaToScalarType(caffe2::TypeMeta)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/core/ScalarType.h:209: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `c10::impl::dispatchTypeId(c10::TensorTypeSet)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/dispatch/DispatchKeyExtractor.h:25: undefined reference to `c10::impl::tls_local_tensor_type_set()'
+./center_surround_convolution.o: In function `at::constant_pad_nd(at::Tensor const&, c10::ArrayRef<long>, c10::Scalar)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/Functions.h:3021: undefined reference to `c10::Dispatcher::singleton()'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/Functions.h:3021: undefined reference to `c10::Dispatcher::findSchema(c10::OperatorName const&)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/Functions.h:3023: undefined reference to `c10::Dispatcher::singleton()'
+./center_surround_convolution.o: In function `at::empty(c10::ArrayRef<long>, c10::TensorOptions const&, c10::optional<c10::MemoryFormat>)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/Functions.h:4002: undefined reference to `at::globalLegacyTypeDispatch()'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/Functions.h:4003: undefined reference to `c10::Dispatcher::singleton()'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/Functions.h:4003: undefined reference to `c10::Dispatcher::findSchema(c10::OperatorName const&)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/Functions.h:4005: undefined reference to `c10::Dispatcher::singleton()'
+./center_surround_convolution.o: In function `center_surrond_convolution_forward(at::Tensor, at::Tensor, at::Tensor, at::Tensor)::{lambda()#1}::operator()() const':
+/home/singh/exercises/exercise05/CenterSurroundLayer/Debug/../center_surround_convolution.cu:131: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `PyInit_TORCH_EXTENSION_NAME':
+/home/singh/exercises/exercise05/CenterSurroundLayer/Debug/../center_surround_convolution.cu:172: undefined reference to `Py_GetVersion'
+/home/singh/exercises/exercise05/CenterSurroundLayer/Debug/../center_surround_convolution.cu:172: undefined reference to `PyExc_ImportError'
+/home/singh/exercises/exercise05/CenterSurroundLayer/Debug/../center_surround_convolution.cu:172: undefined reference to `PyErr_Format'
+/home/singh/exercises/exercise05/CenterSurroundLayer/Debug/../center_surround_convolution.cu:172: undefined reference to `PyExc_ImportError'
+/home/singh/exercises/exercise05/CenterSurroundLayer/Debug/../center_surround_convolution.cu:172: undefined reference to `PyErr_SetString'
+/home/singh/exercises/exercise05/CenterSurroundLayer/Debug/../center_surround_convolution.cu:172: undefined reference to `PyExc_ImportError'
+/home/singh/exercises/exercise05/CenterSurroundLayer/Debug/../center_surround_convolution.cu:172: undefined reference to `PyErr_SetString'
+./center_surround_convolution.o: In function `c10::Device::validate()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/core/Device.h:96: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/core/Device.h:98: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `c10::operator<<(std::ostream&, c10::Layout)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/core/Layout.h:37: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `caffe2::TypeMeta::TypeMeta()':
+makefile:59: recipe for target 'CenterSurroundLayer' failed
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/typeid.h:463: undefined reference to `caffe2::detail::TypeMetaData const* caffe2::TypeMeta::_typeMetaDataInstance<caffe2::detail::_Uninitialized>()'
+./center_surround_convolution.o: In function `c10::intrusive_ptr_target::~intrusive_ptr_target()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/intrusive_ptr.h:91: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/intrusive_ptr.h:94: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `c10::TensorTypeSet::has(c10::TensorTypeId) const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/core/TensorTypeSet.h:55: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `c10::TensorOptions::dtype() const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/core/TensorOptions.h:238: undefined reference to `c10::get_default_dtype()'
+./center_surround_convolution.o: In function `c10::TensorOptions::computeTensorTypeId() const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/core/TensorOptions.h:368: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/core/TensorOptions.h:379: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/core/TensorOptions.h:386: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/core/TensorOptions.h:389: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `c10::TensorImpl::device() const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/core/TensorImpl.h:461: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o:/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/core/TensorImpl.h:618: more undefined references to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)' follow
+./center_surround_convolution.o: In function `c10::UndefinedTensorImpl::singleton()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/core/UndefinedTensorImpl.h:18: undefined reference to `c10::UndefinedTensorImpl::_singleton'
+./center_surround_convolution.o: In function `at::Tensor::type() const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/TensorBody.h:242: undefined reference to `at::globalDeprecatedTypePropertiesRegistry()'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/TensorBody.h:242: undefined reference to `at::DeprecatedTypePropertiesRegistry::getDeprecatedTypeProperties(c10::Backend, c10::ScalarType) const'
+./center_surround_convolution.o: In function `c10::IValue::toInt() const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/ivalue.h:221: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `c10::DispatchTable::listAllDispatchKeys[abi:cxx11]() const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/dispatch/DispatchTable.h:101: undefined reference to `c10::toString(c10::TensorTypeId)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/dispatch/DispatchTable.h:103: undefined reference to `c10::toString(c10::TensorTypeId)'
+./center_surround_convolution.o: In function `c10::Dispatcher::dispatch_(c10::DispatchTable const&, ska::flat_hash_map<c10::TensorTypeId, c10::KernelFunction, std::hash<c10::TensorTypeId>, std::equal_to<c10::TensorTypeId>, std::allocator<std::pair<c10::TensorTypeId, c10::KernelFunction> > > const&, c10::optional<c10::TensorTypeId>)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/dispatch/Dispatcher.h:246: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/dispatch/Dispatcher.h:253: undefined reference to `c10::toString(c10::TensorTypeId)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/dispatch/Dispatcher.h:254: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `at::LegacyTypeDispatch::initForTensorTypeSet(c10::TensorTypeSet)::{lambda()#1}::operator()() const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/LegacyTypeDispatch.h:34: undefined reference to `at::getLegacyDeviceTypeInit()'
+./center_surround_convolution.o: In function `at::LegacyTypeDispatch::initForTensorTypeSet(c10::TensorTypeSet)::{lambda()#2}::operator()() const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/LegacyTypeDispatch.h:38: undefined reference to `at::getLegacyDeviceTypeInit()'
+./center_surround_convolution.o: In function `at::LegacyTypeDispatch::initForTensorTypeSet(c10::TensorTypeSet)::{lambda()#3}::operator()() const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/LegacyTypeDispatch.h:42: undefined reference to `at::getLegacyDeviceTypeInit()'
+./center_surround_convolution.o: In function `at::AutoNonVariableTypeMode::AutoNonVariableTypeMode(bool)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/LegacyTypeDispatch.h:84: undefined reference to `c10::impl::ExcludeTensorTypeIdGuard::ExcludeTensorTypeIdGuard(c10::TensorTypeId)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/LegacyTypeDispatch.h:87: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/LegacyTypeDispatch.h:84: undefined reference to `c10::impl::ExcludeTensorTypeIdGuard::~ExcludeTensorTypeIdGuard()'
+./center_surround_convolution.o: In function `at::Tensor::size(long) const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/TensorMethods.h:2487: undefined reference to `c10::Dispatcher::singleton()'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/TensorMethods.h:2487: undefined reference to `c10::Dispatcher::findSchema(c10::OperatorName const&)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/TensorMethods.h:2488: undefined reference to `c10::Dispatcher::singleton()'
+./center_surround_convolution.o: In function `float* at::Tensor::data_ptr<float>() const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/TensorMethods.h:6321: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `double* at::Tensor::data_ptr<double>() const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/TensorMethods.h:6321: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `at::AutoNonVariableTypeMode::~AutoNonVariableTypeMode()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/LegacyTypeDispatch.h:81: undefined reference to `c10::impl::ExcludeTensorTypeIdGuard::~ExcludeTensorTypeIdGuard()'
+./center_surround_convolution.o: In function `torch::autograd::AutogradMeta::set_requires_grad(bool, c10::TensorImpl*)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/variable.h:209: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `c10::AutogradMetaInterface::AutogradMetaInterface()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/core/TensorImpl.h:134: undefined reference to `vtable for c10::AutogradMetaInterface'
+./center_surround_convolution.o: In function `torch::autograd::AutogradMeta::AutogradMeta(c10::TensorImpl*, bool, torch::autograd::Edge)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/variable.h:236: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/variable.h:239: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/variable.h:228: undefined reference to `c10::AutogradMetaInterface::~AutogradMetaInterface()'
+./center_surround_convolution.o: In function `torch::autograd::make_variable(at::Tensor, bool, bool)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/variable.h:400: undefined reference to `c10::TensorImpl::set_autograd_meta(std::unique_ptr<c10::AutogradMetaInterface, std::default_delete<c10::AutogradMetaInterface> >)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/variable.h:402: undefined reference to `c10::TensorImpl::set_autograd_meta(std::unique_ptr<c10::AutogradMetaInterface, std::default_delete<c10::AutogradMetaInterface> >)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/variable.h:410: undefined reference to `c10::TensorImpl::set_autograd_meta(std::unique_ptr<c10::AutogradMetaInterface, std::default_delete<c10::AutogradMetaInterface> >)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/variable.h:413: undefined reference to `c10::TensorImpl::set_autograd_meta(std::unique_ptr<c10::AutogradMetaInterface, std::default_delete<c10::AutogradMetaInterface> >)'
+./center_surround_convolution.o: In function `torch::jit::tracer::isTracing()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/jit/tracer.h:152: undefined reference to `torch::jit::tracer::getTracingState()'
+./center_surround_convolution.o: In function `torch::jit::Node::inBlockList() const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/jit/ir.h:818: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `torch::jit::Graph::insertNode(torch::jit::Node*)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/jit/ir.h:1165: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/jit/ir.h:1168: undefined reference to `torch::jit::Node::insertBefore(torch::jit::Node*)'
+./center_surround_convolution.o: In function `torch::empty(c10::ArrayRef<long>, c10::TensorOptions const&, c10::optional<c10::MemoryFormat>)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/generated/variable_factories.h:379: undefined reference to `torch::jit::tracer::getTracingState()'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/generated/variable_factories.h:381: undefined reference to `c10::Symbol::fromQualString(std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/generated/variable_factories.h:382: undefined reference to `torch::jit::Graph::create(c10::Symbol, unsigned long)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/generated/variable_factories.h:383: undefined reference to `torch::jit::tracer::recordSourceLocation(torch::jit::Node*)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/generated/variable_factories.h:384: undefined reference to `torch::jit::tracer::addInputs(torch::jit::Node*, char const*, c10::ArrayRef<long>)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/generated/variable_factories.h:385: undefined reference to `torch::jit::tracer::addInputs(torch::jit::Node*, char const*, c10::TensorOptions const&)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/generated/variable_factories.h:386: undefined reference to `torch::jit::tracer::addInputs(torch::jit::Node*, char const*, c10::optional<c10::MemoryFormat> const&)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/generated/variable_factories.h:389: undefined reference to `torch::jit::tracer::setTracingState(std::shared_ptr<torch::jit::tracer::TracingState>)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/generated/variable_factories.h:398: undefined reference to `torch::jit::tracer::setTracingState(std::shared_ptr<torch::jit::tracer::TracingState>)'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/generated/variable_factories.h:399: undefined reference to `torch::jit::tracer::addOutput(torch::jit::Node*, at::Tensor const&)'
+./center_surround_convolution.o: In function `pybind11::cast_error::set_error() const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/common.h:676: undefined reference to `PyExc_RuntimeError'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/common.h:676: undefined reference to `PyErr_SetString'
+./center_surround_convolution.o: In function `pybind11::error_scope::error_scope()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/common.h:715: undefined reference to `PyErr_Fetch'
+./center_surround_convolution.o: In function `pybind11::error_scope::~error_scope()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/common.h:716: undefined reference to `PyErr_Restore'
+./center_surround_convolution.o: In function `pybind11::error_already_set::error_already_set()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:327: undefined reference to `PyErr_Fetch'
+./center_surround_convolution.o: In function `pybind11::error_already_set::restore()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:338: undefined reference to `PyErr_Restore'
+./center_surround_convolution.o: In function `pybind11::hasattr(pybind11::handle, char const*)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:388: undefined reference to `PyObject_HasAttrString'
+./center_surround_convolution.o: In function `pybind11::getattr(pybind11::handle, char const*)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:406: undefined reference to `PyObject_GetAttrString'
+./center_surround_convolution.o: In function `pybind11::getattr(pybind11::handle, char const*, pybind11::handle)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:421: undefined reference to `PyObject_GetAttrString'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:424: undefined reference to `PyErr_Clear'
+./center_surround_convolution.o: In function `pybind11::setattr(pybind11::handle, char const*, pybind11::handle)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:434: undefined reference to `PyObject_SetAttrString'
+./center_surround_convolution.o: In function `pybind11::detail::accessor_policies::generic_item::get(pybind11::handle, pybind11::handle)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:536: undefined reference to `PyObject_GetItem'
+./center_surround_convolution.o: In function `pybind11::detail::accessor_policies::generic_item::set(pybind11::handle, pybind11::handle, pybind11::handle)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:542: undefined reference to `PyObject_SetItem'
+./center_surround_convolution.o: In function `pybind11::detail::accessor_policies::tuple_item::get(pybind11::handle, unsigned long)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:584: undefined reference to `PyTuple_GetItem'
+./center_surround_convolution.o: In function `pybind11::detail::accessor_policies::tuple_item::set(pybind11::handle, unsigned long, pybind11::handle)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:591: undefined reference to `PyTuple_SetItem'
+./center_surround_convolution.o: In function `pybind11::detail::iterator_policies::dict_readonly::increment()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:702: undefined reference to `PyDict_Next'
+./center_surround_convolution.o: In function `pybind11::str::str(char const*)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:892: undefined reference to `PyUnicode_FromString'
+./center_surround_convolution.o: In function `pybind11::str::operator std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >() const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:910: undefined reference to `PyUnicode_AsUTF8String'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:916: undefined reference to `PyBytes_AsStringAndSize'
+./center_surround_convolution.o: In function `pybind11::str::raw_str(_object*)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:929: undefined reference to `PyObject_Str'
+./center_surround_convolution.o: In function `pybind11::none::none()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:1009: undefined reference to `_Py_NoneStruct'
+./center_surround_convolution.o: In function `pybind11::weakref::weakref(pybind11::handle, pybind11::handle)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:1109: undefined reference to `PyWeakref_NewRef'
+./center_surround_convolution.o: In function `pybind11::capsule::check_(pybind11::handle)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:1134: undefined reference to `PyCapsule_Type'
+./center_surround_convolution.o: In function `pybind11::capsule::capsule(void const*, char const*, void (*)(_object*))':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:1138: undefined reference to `PyCapsule_New'
+./center_surround_convolution.o: In function `pybind11::capsule::capsule(void const*, void (*)(void*))::{lambda(_object*)#1}::operator()(_object*) const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:1153: undefined reference to `PyCapsule_GetContext'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:1154: undefined reference to `PyCapsule_GetPointer'
+./center_surround_convolution.o: In function `pybind11::capsule::capsule(void const*, void (*)(void*))':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:1152: undefined reference to `PyCapsule_New'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:1161: undefined reference to `PyCapsule_SetContext'
+./center_surround_convolution.o: In function `pybind11::capsule::name() const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:1182: undefined reference to `PyCapsule_GetName'
+./center_surround_convolution.o: In function `pybind11::tuple::tuple(unsigned long)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:1188: undefined reference to `PyTuple_New'
+./center_surround_convolution.o: In function `pybind11::tuple::size() const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:1191: undefined reference to `PyTuple_Size'
+./center_surround_convolution.o: In function `pybind11::dict::dict()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:1201: undefined reference to `PyDict_New'
+./center_surround_convolution.o: In function `pybind11::dict::size() const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:1210: undefined reference to `PyDict_Size'
+./center_surround_convolution.o: In function `pybind11::list::list(unsigned long)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:1239: undefined reference to `PyList_New'
+./center_surround_convolution.o: In function `pybind11::repr(pybind11::handle)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:1339: undefined reference to `PyObject_Repr'
+./center_surround_convolution.o: In function `pybind11::detail::get_internals()::{lambda(std::__exception_ptr::exception_ptr)#1}::operator()(std::__exception_ptr::exception_ptr) const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/internals.h:222: undefined reference to `PyExc_MemoryError'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/internals.h:222: undefined reference to `PyErr_SetString'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/internals.h:223: undefined reference to `PyExc_ValueError'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/internals.h:223: undefined reference to `PyErr_SetString'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/internals.h:224: undefined reference to `PyExc_ValueError'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/internals.h:224: undefined reference to `PyErr_SetString'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/internals.h:225: undefined reference to `PyExc_ValueError'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/internals.h:225: undefined reference to `PyErr_SetString'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/internals.h:226: undefined reference to `PyExc_IndexError'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/internals.h:226: undefined reference to `PyErr_SetString'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/internals.h:227: undefined reference to `PyExc_ValueError'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/internals.h:227: undefined reference to `PyErr_SetString'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/internals.h:228: undefined reference to `PyExc_RuntimeError'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/internals.h:228: undefined reference to `PyErr_SetString'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/internals.h:230: undefined reference to `PyExc_RuntimeError'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/internals.h:230: undefined reference to `PyErr_SetString'
+./center_surround_convolution.o: In function `pybind11::detail::get_internals()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/internals.h:175: undefined reference to `PyEval_GetBuiltins'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/internals.h:200: undefined reference to `PyEval_InitThreads'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/internals.h:201: undefined reference to `PyThreadState_Get'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/internals.h:208: undefined reference to `PyThread_create_key'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/internals.h:211: undefined reference to `PyThread_set_key_value'
+./center_surround_convolution.o: In function `pybind11::detail::instance::allocate_layout()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/cast.h:382: undefined reference to `PyMem_Calloc'
+./center_surround_convolution.o: In function `pybind11::detail::instance::deallocate_layout()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/cast.h:396: undefined reference to `PyMem_Free'
+./center_surround_convolution.o: In function `pybind11::detail::error_string[abi:cxx11]()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/cast.h:407: undefined reference to `PyErr_Occurred'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/cast.h:408: undefined reference to `PyExc_RuntimeError'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/cast.h:408: undefined reference to `PyErr_SetString'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/cast.h:422: undefined reference to `PyErr_NormalizeException'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/cast.h:426: undefined reference to `PyException_SetTraceback'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/cast.h:440: undefined reference to `PyFrame_GetLineNumber'
+./center_surround_convolution.o: In function `pybind11::detail::get_thread_state_unchecked()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/cast.h:475: undefined reference to `_PyThreadState_UncheckedGet'
+./center_surround_convolution.o: In function `pybind11::detail::type_caster<bool, void>::load(pybind11::handle, bool)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/cast.h:1120: undefined reference to `_Py_TrueStruct'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/cast.h:1121: undefined reference to `_Py_FalseStruct'
+./center_surround_convolution.o: In function `pybind11_static_get':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:35: undefined reference to `PyProperty_Type'
+./center_surround_convolution.o: In function `pybind11_static_set':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:41: undefined reference to `PyProperty_Type'
+./center_surround_convolution.o: In function `pybind11::detail::make_static_property_type()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:49: undefined reference to `PyUnicode_FromString'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:55: undefined reference to `PyType_Type'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:55: undefined reference to `PyType_Type'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:66: undefined reference to `PyProperty_Type'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:71: undefined reference to `PyType_Ready'
+./center_surround_convolution.o: In function `pybind11_meta_setattro':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:112: undefined reference to `_PyType_Lookup'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:119: undefined reference to `PyObject_IsInstance'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:119: undefined reference to `PyObject_IsInstance'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:135: undefined reference to `PyType_Type'
+./center_surround_convolution.o: In function `pybind11_meta_getattro':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:147: undefined reference to `_PyType_Lookup'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:148: undefined reference to `PyInstanceMethod_Type'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:153: undefined reference to `PyType_Type'
+./center_surround_convolution.o: In function `pybind11::detail::make_default_metaclass()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:163: undefined reference to `PyUnicode_FromString'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:169: undefined reference to `PyType_Type'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:169: undefined reference to `PyType_Type'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:180: undefined reference to `PyType_Type'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:188: undefined reference to `PyType_Ready'
+./center_surround_convolution.o: In function `pybind11_object_init':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:285: undefined reference to `PyExc_TypeError'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:285: undefined reference to `PyErr_SetString'
+./center_surround_convolution.o: In function `pybind11::detail::clear_instance(_object*)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:334: undefined reference to `PyObject_ClearWeakRefs'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:336: undefined reference to `_PyObject_GetDictPtr'
+./center_surround_convolution.o: In function `pybind11::detail::make_object_base_type(_typeobject*)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:366: undefined reference to `PyUnicode_FromString'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:383: undefined reference to `PyBaseObject_Type'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/detail/class.h:394: undefined reference to `PyType_Ready'
+./center_surround_convolution.o: In function `pybind11::cpp_function::initialize_generic(pybind11::detail::function_record*, char const*, std::type_info const* const*, unsigned long)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:210: undefined reference to `PyExc_FutureWarning'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:210: undefined reference to `PyErr_WarnEx'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:286: undefined reference to `PyInstanceMethod_Type'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:291: undefined reference to `PyCFunction_Type'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:326: undefined reference to `PyCFunction_NewEx'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:389: undefined reference to `PyInstanceMethod_New'
+./center_surround_convolution.o: In function `pybind11::cpp_function::dispatcher(_object*, _object*, _object*)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:424: undefined reference to `PyCapsule_GetPointer'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:440: undefined reference to `PyExc_TypeError'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:440: undefined reference to `PyErr_SetString'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:514: undefined reference to `PyDict_GetItemString'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:542: undefined reference to `PyDict_GetItemString'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:547: undefined reference to `PyDict_Copy'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:550: undefined reference to `PyDict_DelItemString'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:705: undefined reference to `_Py_NotImplementedStruct'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:761: undefined reference to `PyExc_TypeError'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:761: undefined reference to `PyErr_SetString'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:768: undefined reference to `PyExc_TypeError'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:768: undefined reference to `PyErr_SetString'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:689: undefined reference to `PyExc_SystemError'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:689: undefined reference to `PyErr_SetString'
+./center_surround_convolution.o: In function `pybind11::module::module(char const*, char const*)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:795: undefined reference to `PyModule_Create2'
+./center_surround_convolution.o: In function `pybind11::module::add_object(char const*, pybind11::handle, bool)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:865: undefined reference to `PyModule_AddObject'
+./center_surround_convolution.o: In function `pybind11::gil_scoped_acquire::gil_scoped_acquire()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:1872: undefined reference to `PyThread_get_key_value'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:1880: undefined reference to `PyGILState_GetThisThreadState'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:1884: undefined reference to `PyThreadState_New'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:1890: undefined reference to `PyThread_set_key_value'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:1901: undefined reference to `PyEval_AcquireThread'
+./center_surround_convolution.o: In function `pybind11::gil_scoped_acquire::dec_ref()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:1927: undefined reference to `PyThreadState_Clear'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:1928: undefined reference to `PyThreadState_DeleteCurrent'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:1929: undefined reference to `PyThread_set_key_value'
+./center_surround_convolution.o: In function `pybind11::gil_scoped_acquire::~gil_scoped_acquire()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pybind11.h:1937: undefined reference to `PyEval_SaveThread'
+./center_surround_convolution.o: In function `THPVariable_Check(_object*)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/python_variable.h:32: undefined reference to `THPVariableClass'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/python_variable.h:32: undefined reference to `THPVariableClass'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/python_variable.h:32: undefined reference to `PyObject_IsInstance'
+./center_surround_convolution.o: In function `pybind11::detail::type_caster<at::Tensor, void>::cast(at::Tensor const&, pybind11::return_value_policy, pybind11::handle)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/utils/pybind.h:38: undefined reference to `THPVariable_Wrap(at::Tensor)'
+./center_surround_convolution.o: In function `caffe2::TypeMeta caffe2::TypeMeta::Make<unsigned char>()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/typeid.h:446: undefined reference to `caffe2::detail::TypeMetaData const* caffe2::TypeMeta::_typeMetaDataInstance<unsigned char>()'
+./center_surround_convolution.o: In function `caffe2::TypeMeta caffe2::TypeMeta::Make<signed char>()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/typeid.h:446: undefined reference to `caffe2::detail::TypeMetaData const* caffe2::TypeMeta::_typeMetaDataInstance<signed char>()'
+./center_surround_convolution.o: In function `caffe2::TypeMeta caffe2::TypeMeta::Make<short>()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/typeid.h:446: undefined reference to `caffe2::detail::TypeMetaData const* caffe2::TypeMeta::_typeMetaDataInstance<short>()'
+./center_surround_convolution.o: In function `caffe2::TypeMeta caffe2::TypeMeta::Make<int>()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/typeid.h:446: undefined reference to `caffe2::detail::TypeMetaData const* caffe2::TypeMeta::_typeMetaDataInstance<int>()'
+./center_surround_convolution.o: In function `caffe2::TypeMeta caffe2::TypeMeta::Make<long>()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/typeid.h:446: undefined reference to `caffe2::detail::TypeMetaData const* caffe2::TypeMeta::_typeMetaDataInstance<long>()'
+./center_surround_convolution.o: In function `caffe2::TypeMeta caffe2::TypeMeta::Make<c10::Half>()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/typeid.h:446: undefined reference to `caffe2::detail::TypeMetaData const* caffe2::TypeMeta::_typeMetaDataInstance<c10::Half>()'
+./center_surround_convolution.o: In function `caffe2::TypeMeta caffe2::TypeMeta::Make<float>()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/typeid.h:446: undefined reference to `caffe2::detail::TypeMetaData const* caffe2::TypeMeta::_typeMetaDataInstance<float>()'
+./center_surround_convolution.o: In function `caffe2::TypeMeta caffe2::TypeMeta::Make<double>()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/typeid.h:446: undefined reference to `caffe2::detail::TypeMetaData const* caffe2::TypeMeta::_typeMetaDataInstance<double>()'
+./center_surround_convolution.o: In function `caffe2::TypeMeta caffe2::TypeMeta::Make<c10::ComplexHalf>()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/typeid.h:446: undefined reference to `caffe2::detail::TypeMetaData const* caffe2::TypeMeta::_typeMetaDataInstance<c10::ComplexHalf>()'
+./center_surround_convolution.o: In function `caffe2::TypeMeta caffe2::TypeMeta::Make<std::complex<float> >()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/typeid.h:446: undefined reference to `caffe2::detail::TypeMetaData const* caffe2::TypeMeta::_typeMetaDataInstance<std::complex<float> >()'
+./center_surround_convolution.o: In function `caffe2::TypeMeta caffe2::TypeMeta::Make<std::complex<double> >()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/typeid.h:446: undefined reference to `caffe2::detail::TypeMetaData const* caffe2::TypeMeta::_typeMetaDataInstance<std::complex<double> >()'
+./center_surround_convolution.o: In function `caffe2::TypeMeta caffe2::TypeMeta::Make<bool>()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/typeid.h:446: undefined reference to `caffe2::detail::TypeMetaData const* caffe2::TypeMeta::_typeMetaDataInstance<bool>()'
+./center_surround_convolution.o: In function `caffe2::TypeMeta caffe2::TypeMeta::Make<c10::qint8>()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/typeid.h:446: undefined reference to `caffe2::detail::TypeMetaData const* caffe2::TypeMeta::_typeMetaDataInstance<c10::qint8>()'
+./center_surround_convolution.o: In function `caffe2::TypeMeta caffe2::TypeMeta::Make<c10::quint8>()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/typeid.h:446: undefined reference to `caffe2::detail::TypeMetaData const* caffe2::TypeMeta::_typeMetaDataInstance<c10::quint8>()'
+./center_surround_convolution.o: In function `caffe2::TypeMeta caffe2::TypeMeta::Make<c10::qint32>()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/typeid.h:446: undefined reference to `caffe2::detail::TypeMetaData const* caffe2::TypeMeta::_typeMetaDataInstance<c10::qint32>()'
+./center_surround_convolution.o: In function `caffe2::TypeMeta caffe2::TypeMeta::Make<c10::BFloat16>()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/typeid.h:446: undefined reference to `caffe2::detail::TypeMetaData const* caffe2::TypeMeta::_typeMetaDataInstance<c10::BFloat16>()'
+./center_surround_convolution.o: In function `c10::intrusive_ptr<c10::intrusive_ptr_target, c10::detail::intrusive_target_default_null_type<c10::intrusive_ptr_target> >::reclaim(c10::intrusive_ptr_target*)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/intrusive_ptr.h:346: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `pybind11::capsule::operator pybind11::detail::internals**<pybind11::detail::internals*>() const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:1177: undefined reference to `PyCapsule_GetPointer'
+./center_surround_convolution.o: In function `pybind11::detail::object_api<pybind11::handle>::is_none() const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:116: undefined reference to `_Py_NoneStruct'
+./center_surround_convolution.o: In function `pybind11::capsule::operator pybind11::detail::function_record*<pybind11::detail::function_record>() const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/pytypes.h:1177: undefined reference to `PyCapsule_GetPointer'
+./center_surround_convolution.o: In function `c10::intrusive_ptr<c10::intrusive_ptr_target, c10::detail::intrusive_target_default_null_type<c10::intrusive_ptr_target> >::retain_()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/intrusive_ptr.h:183: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `c10::intrusive_ptr<c10::TensorImpl, c10::UndefinedTensorImpl>::retain_()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/intrusive_ptr.h:183: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `torch::autograd::AutogradMeta::~AutogradMeta()':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/torch/csrc/autograd/variable.h:179: undefined reference to `c10::AutogradMetaInterface::~AutogradMetaInterface()'
+./center_surround_convolution.o: In function `pybind11::detail::simple_collector<(pybind11::return_value_policy)1>::call(_object*) const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/cast.h:1953: undefined reference to `PyObject_CallObject'
+./center_surround_convolution.o: In function `at::GenericPackedTensorAccessor<double, 4ul, at::RestrictPtrTraits, int> at::Tensor::generic_packed_accessor<double, 4ul, at::RestrictPtrTraits, int>() const &':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/TensorBody.h:351: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `at::GenericPackedTensorAccessor<double, 2ul, at::RestrictPtrTraits, int> at::Tensor::generic_packed_accessor<double, 2ul, at::RestrictPtrTraits, int>() const &':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/TensorBody.h:351: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `at::GenericPackedTensorAccessor<double, 1ul, at::RestrictPtrTraits, int> at::Tensor::generic_packed_accessor<double, 1ul, at::RestrictPtrTraits, int>() const &':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/TensorBody.h:351: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `at::GenericPackedTensorAccessor<float, 4ul, at::RestrictPtrTraits, int> at::Tensor::generic_packed_accessor<float, 4ul, at::RestrictPtrTraits, int>() const &':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/TensorBody.h:351: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `at::GenericPackedTensorAccessor<float, 2ul, at::RestrictPtrTraits, int> at::Tensor::generic_packed_accessor<float, 2ul, at::RestrictPtrTraits, int>() const &':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/TensorBody.h:351: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o:/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/TensorBody.h:351: more undefined references to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)' follow
+./center_surround_convolution.o: In function `std::ostream& c10::detail::_str<c10::TensorTypeId>(std::ostream&, c10::TensorTypeId const&)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/StringUtil.h:26: undefined reference to `c10::operator<<(std::ostream&, c10::TensorTypeId)'
+./center_surround_convolution.o: In function `std::ostream& c10::detail::_str<c10::DeviceType>(std::ostream&, c10::DeviceType const&)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/c10/util/StringUtil.h:26: undefined reference to `c10::operator<<(std::ostream&, c10::DeviceType)'
+./center_surround_convolution.o: In function `long c10::KernelFunction::callUnboxed<long, at::Tensor const&, long>(at::Tensor const&, long) const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/boxing/KernelFunction.h:132: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `at::Tensor c10::KernelFunction::callUnboxedOnly<at::Tensor, at::Tensor const&, c10::ArrayRef<long>, c10::Scalar>(at::Tensor const&, c10::ArrayRef<long>, c10::Scalar) const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/boxing/KernelFunction.h:98: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `at::Tensor c10::KernelFunction::callUnboxedOnly<at::Tensor, c10::ArrayRef<long>, c10::TensorOptions const&, c10::optional<c10::MemoryFormat> >(c10::ArrayRef<long>, c10::TensorOptions const&, c10::optional<c10::MemoryFormat>) const':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/boxing/KernelFunction.h:98: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `c10::detail::boxAndCallBoxedFunc<long, at::Tensor const&, long>::call(void (*)(c10::OperatorKernel*, std::vector<c10::IValue, std::allocator<c10::IValue> >*), c10::OperatorKernel*, at::Tensor const&, long)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/ATen/core/boxing/KernelFunction.h:391: undefined reference to `c10::Error::Error(c10::SourceLocation, std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> > const&)'
+./center_surround_convolution.o: In function `pybind11::detail::string_caster<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, false>::decode_utfN(char const*, long)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/cast.h:1224: undefined reference to `PyUnicode_DecodeUTF8'
+./center_surround_convolution.o: In function `pybind11::detail::string_caster<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, false>::load(pybind11::handle, bool)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/cast.h:1195: undefined reference to `PyUnicode_AsEncodedString'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/cast.h:1197: undefined reference to `PyErr_Clear'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/cast.h:1199: undefined reference to `PyBytes_AsString'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/cast.h:1200: undefined reference to `PyBytes_Size'
+./center_surround_convolution.o: In function `bool pybind11::detail::string_caster<std::__cxx11::basic_string<char, std::char_traits<char>, std::allocator<char> >, false>::load_bytes<char>(std::enable_if<(sizeof (char))==(1), pybind11::handle>::type)':
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/cast.h:1245: undefined reference to `PyBytes_AsString'
+/local/var/tmp/env/lib/python3.6/site-packages/torch/include/pybind11/cast.h:1247: undefined reference to `PyBytes_Size'
+./center_surround_convolution.o:(.data.rel.ro._ZTIN5torch8autograd12AutogradMetaE[_ZTIN5torch8autograd12AutogradMetaE]+0x10): undefined reference to `typeinfo for c10::AutogradMetaInterface'
+collect2: error: ld returned 1 exit status
+make: *** [CenterSurroundLayer] Error 1
+
+14:15:54 Build Finished (took 54s.875ms)
+

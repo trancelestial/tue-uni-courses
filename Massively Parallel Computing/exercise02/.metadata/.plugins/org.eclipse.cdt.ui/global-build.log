@@ -1,0 +1,95 @@
+19:49:15 **** Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o -c reverseArray.cu
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o.ptx -ptx reverseArray.cu
+g++ -fPIC -o reverseArray   reverseArray.o -L/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/lib64 -lcudart
+19:49:23 **** Incremental Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o -c reverseArray.cu
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o.ptx -ptx reverseArray.cu
+g++ -fPIC -o reverseArray   reverseArray.o -L/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/lib64 -lcudart
+19:49:55 **** Incremental Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o -c reverseArray.cu
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o.ptx -ptx reverseArray.cu
+g++ -fPIC -o reverseArray   reverseArray.o -L/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/lib64 -lcudart
+19:52:25 **** Incremental Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o -c reverseArray.cu
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o.ptx -ptx reverseArray.cu
+g++ -fPIC -o reverseArray   reverseArray.o -L/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/lib64 -lcudart
+19:52:37 **** Incremental Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o -c reverseArray.cu
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o.ptx -ptx reverseArray.cu
+g++ -fPIC -o reverseArray   reverseArray.o -L/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/lib64 -lcudart
+19:53:31 **** Incremental Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+make: Nothing to be done for 'all'.
+19:53:40 **** Incremental Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+make: Nothing to be done for 'all'.
+19:54:05 **** Incremental Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+make: Nothing to be done for 'all'.
+19:56:18 **** Incremental Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+make: Nothing to be done for 'all'.
+19:59:27 **** Incremental Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+make: Nothing to be done for 'all'.
+19:59:32 **** Incremental Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+make: Nothing to be done for 'all'.
+20:00:19 **** Incremental Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o -c reverseArray.cu
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o.ptx -ptx reverseArray.cu
+g++ -fPIC -o reverseArray   reverseArray.o -L/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/lib64 -lcudart
+20:01:34 **** Incremental Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o -c reverseArray.cu
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o.ptx -ptx reverseArray.cu
+g++ -fPIC -o reverseArray   reverseArray.o -L/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/lib64 -lcudart
+20:01:47 **** Incremental Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o -c reverseArray.cu
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o.ptx -ptx reverseArray.cu
+g++ -fPIC -o reverseArray   reverseArray.o -L/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/lib64 -lcudart
+20:04:04 **** Incremental Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o -c reverseArray.cu
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o.ptx -ptx reverseArray.cu
+g++ -fPIC -o reverseArray   reverseArray.o -L/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/lib64 -lcudart
+20:04:13 **** Incremental Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o -c reverseArray.cu
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o.ptx -ptx reverseArray.cu
+g++ -fPIC -o reverseArray   reverseArray.o -L/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/lib64 -lcudart
+20:04:26 **** Incremental Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o -c reverseArray.cu
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o.ptx -ptx reverseArray.cu
+g++ -fPIC -o reverseArray   reverseArray.o -L/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/lib64 -lcudart
+11:59:27 **** Incremental Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o -c reverseArray.cu
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o.ptx -ptx reverseArray.cu
+g++ -fPIC -o reverseArray   reverseArray.o -L/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/lib64 -lcudart
+12:14:29 **** Incremental Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+make: Nothing to be done for 'all'.
+12:17:21 **** Incremental Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+make: Nothing to be done for 'all'.
+12:17:32 **** Incremental Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+make: Nothing to be done for 'all'.
+12:18:43 **** Incremental Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o -c reverseArray.cu
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -I/C/common/inc -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o reverseArray.o.ptx -ptx reverseArray.cu
+g++ -fPIC -o reverseArray   reverseArray.o -L/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/lib64 -lcudart
+12:29:31 **** Incremental Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+make: Nothing to be done for 'all'.

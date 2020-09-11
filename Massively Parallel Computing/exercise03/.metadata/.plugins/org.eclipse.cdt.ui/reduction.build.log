@@ -1,0 +1,6 @@
+19:13:34 **** Incremental Build of configuration Default for project reduction ****
+make dbg=1 all 
+make: Nothing to be done for 'all'.
+
+19:13:34 Build Finished (took 69ms)
+

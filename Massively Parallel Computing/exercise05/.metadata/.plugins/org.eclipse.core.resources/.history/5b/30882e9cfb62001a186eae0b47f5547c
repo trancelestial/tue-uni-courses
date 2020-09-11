@@ -1,0 +1,298 @@
+#include <torch/extension.h>
+#include <cuda.h>
+#include <cuda_runtime.h>
+#include <vector>
+#include <iostream>
+
+
+/** forward kernel
+ * c) Implement the forward pass of the Center Surround Convolution
+ *  - Write a CUDA-kernel that computes the forward pass form Equation 1. The
+ *    kernel should take I, w c , w s, w b and O in form of
+ *    torch::PackedTensorAccessor32<scalar t> objects and write into O
+ */
+template <typename scalar_t>
+__global__ void center_surround_convolution_forward_kernel (
+        const torch::PackedTensorAccessor32<scalar_t, 4,
+        torch::RestrictPtrTraits> I,
+        const torch::PackedTensorAccessor32<scalar_t, 2,
+        torch::RestrictPtrTraits> w_c,
+        const torch::PackedTensorAccessor32<scalar_t, 2,
+        torch::RestrictPtrTraits> w_s,
+        const torch::PackedTensorAccessor32<scalar_t, 1,
+        torch::RestrictPtrTraits> w_b,
+        torch::PackedTensorAccessor32<scalar_t, 4, torch::RestrictPtrTraits> O) {
+
+
+		// TODO implement the forward kernel
+		const int batch_size = I.size(0);
+		const int input_channels_size = I.size(1);
+		const int height = I.size(2);
+		const int width = I.size(3);
+
+		const int batch_index = blockIdx.z;
+		const int output_channel_size = w_s.size(1);
+
+		const int output_x = blockIdx.x * blockDim.x + threadIdx.x;
+		const int output_y = blockIdx.y * blockDim.y + threadIdx.y;
+
+		if (output_x < (width - 2) && output_y < (height - 2)) {
+
+			for (int outc = 0; outc < output_channel_size; outc++) {
+				scalar_t result = 0.0f;
+				for (int inc = 0; inc < input_channels_size; inc++)
+					result += I[batch_index][inc][output_y+1][output_x+1] * w_c[inc][outc] +
+					          (I[batch_index][inc][output_y][output_x] + I[batch_index][inc][output_y+1][output_x] +
+					           I[batch_index][inc][output_y+2][output_x] + I[batch_index][inc][output_y+2][output_x+1] +
+					           I[batch_index][inc][output_y+2][output_x+2] + I[batch_index][inc][output_y+1][output_x+2] +
+					           I[batch_index][inc][output_y][output_x+2] + I[batch_index][inc][output_y][output_x+1]) *
+					           w_s[inc][outc];
+				result += w_b[outc];
+
+				O[batch_index][outc][output_y][output_x] = result;
+			}
+		}
+}
+
+/** backward kernels
+ * d) Implement the backward pass of the Center Surround Convolution.
+ * - Write CUDA kernels to compute the partial derivatives dL_dI, dL_dw_c,
+ *   dL_dw_s and dL_dw_b by implementing Equations 3 4 5 and 6.
+ */
+// dL_dw_c and d_L_dw_s
+template <typename scalar_t>
+__global__ void dL_dw_kernel (
+        const torch::PackedTensorAccessor32<scalar_t, 4,
+        torch::RestrictPtrTraits> dL_dO,
+        const torch::PackedTensorAccessor32<scalar_t, 4,
+        torch::RestrictPtrTraits> I,
+        torch::PackedTensorAccessor32<scalar_t, 2, torch::RestrictPtrTraits>
+        dL_dw_c,
+        torch::PackedTensorAccessor32<scalar_t, 2, torch::RestrictPtrTraits>
+        dL_dw_s) {
+
+		const int batch_size = dL_dO.size(0);
+		const int height = dL_dO.size(2);
+		const int width = dL_dO.size(3);
+
+		const int input_channels_size = I.size(1);
+
+		const int out_chnl_ind = blockIdx.z;
+
+		const int output_x = blockIdx.x * blockDim.x + threadIdx.x;
+		const int output_y = blockIdx.y * blockDim.y + threadIdx.y;
+
+		if (output_x < (width - 2) && output_y < (height - 2)) {
+				for (int inc = 0; inc < input_channels_size; inc++) {
+					scalar_t result_s = 0.0f;
+					scalar_t result_c = 0.0f;
+					for (int btc = 0; btc < batch_size; btc++) {
+						result_c += dL_dO[btc][out_chnl_ind][output_y][output_x] * I[btc][inc][output_y+1][output_x+1];
+						result_s += dL_dO[btc][out_chnl_ind][output_y][output_x] *
+									(I[btc][inc][output_y][output_x] + I[btc][inc][output_y+1][output_x] +
+									 I[btc][inc][output_y+2][output_x] + I[btc][inc][output_y+2][output_x+1] +
+									 I[btc][inc][output_y+2][output_x+2] + I[btc][inc][output_y+1][output_x+2] +
+									 I[btc][inc][output_y][output_x+2] + I[btc][inc][output_y][output_x+1]);
+					}
+					atomicAdd(&dL_dw_c[inc][out_chnl_ind], result_c);
+					atomicAdd(&dL_dw_s[inc][out_chnl_ind], result_s);
+				}
+		}
+}
+
+    // TODO compute dL_dw_c and dL_dw_s here
+
+// dL_dw_b
+template <typename scalar_t>
+__global__ void dL_dw_b_kernel (
+        const torch::PackedTensorAccessor32<scalar_t, 4,
+        torch::RestrictPtrTraits> dL_dO,
+        torch::PackedTensorAccessor32<scalar_t, 1, torch::RestrictPtrTraits>
+        dL_dw_b) {
+    // TODO compute dL_dw_b here
+
+	const int batch_size = dL_dO.size(0);
+	const int height = dL_dO.size(2);
+	const int width = dL_dO.size(3);
+
+	const int out_chnl_ind = blockIdx.z;
+
+	const int output_x = blockIdx.x * blockDim.x + threadIdx.x;
+	const int output_y = blockIdx.y * blockDim.y + threadIdx.y;
+
+	if (output_x < (width - 2) && output_y < (height - 2)) {
+
+			scalar_t result = 0.0f;
+			for (int btc = 0; btc < batch_size; btc++)
+				result +=  dL_dO[btc][out_chnl_ind][output_y][output_x];
+
+			atomicAdd(&dL_dw_b[out_chnl_ind], result);
+	}
+}
+
+// dL_dI
+template <typename scalar_t>
+__global__ void dL_dI_kernel(
+        const torch::PackedTensorAccessor32<scalar_t, 4,
+        torch::RestrictPtrTraits> dL_dO_padded,
+        const torch::PackedTensorAccessor32<scalar_t, 2,
+        torch::RestrictPtrTraits> w_c,
+        const torch::PackedTensorAccessor32<scalar_t, 2,
+        torch::RestrictPtrTraits> w_s,
+        torch::PackedTensorAccessor32<scalar_t, 4,
+        torch::RestrictPtrTraits> dL_dI) {
+    // TODO your kernel for dL_dI here
+
+		const int batch_size = dL_dO_padded.size(0);
+		const int input_channels_size = dL_dO_padded.size(1);
+		const int height = dL_dO_padded.size(2);
+		const int width = dL_dO_padded.size(3);
+
+		const int batch_index = blockIdx.z;
+		const int output_channel_size = w_s.size(1);
+
+		const int output_x = blockIdx.x * blockDim.x + threadIdx.x;
+		const int output_y = blockIdx.y * blockDim.y + threadIdx.y;
+
+		if (output_x < width && output_y < height) {
+
+			for (int outc = 0; outc < output_channel_size; outc++) {
+				scalar_t result = 0.0f;
+				for (int inc = 0; inc < input_channels_size; inc++)
+					result += dL_dO_padded[batch_index][outc][output_y+1][output_x+1] * w_c[inc][outc] +
+							  (dL_dO_padded[batch_index][inc][output_y][output_x] + dL_dO_padded[batch_index][inc][output_y+1][output_x] +
+							   dL_dO_padded[batch_index][inc][output_y+2][output_x] + dL_dO_padded[batch_index][inc][output_y+2][output_x+1] +
+							   dL_dO_padded[batch_index][inc][output_y+2][output_x+2] + dL_dO_padded[batch_index][inc][output_y+1][output_x+2] +
+							   dL_dO_padded[batch_index][inc][output_y][output_x+2] + dL_dO_padded[batch_index][inc][output_y][output_x+1]) *
+							   w_s[inc][outc];
+
+				dL_dI[batch_index][outc][output_y][output_x] = result;
+			}
+		}
+}
+
+#define CHECK_CUDA(x) TORCH_CHECK(x.type().is_cuda(), #x " must be a CUDA tensor")
+#define CHECK_CONTIGUOUS(x) TORCH_CHECK(x.is_contiguous(), #x " must be contiguous")
+#define CHECK_INPUT(x) CHECK_CUDA(x); CHECK_CONTIGUOUS(x)
+
+/** c)
+ * - Write a c++ function that allocates memory for O and calls your kernel
+ *   with appropriate block- and grid dimensions. This function should take I,
+ *   w_c, w_s and w_b as torch::Tensor objects and returns a
+ *   std::vector<torch::Tensor> the computed O tensor.
+ */
+std::vector<torch::Tensor> center_surround_convolution_forward (
+        torch::Tensor I,
+        torch::Tensor w_c,
+        torch::Tensor w_s,
+        torch::Tensor w_b) {
+    // TODO Use the forward kernel to compute O
+    // - Check inputs
+    // - Allocate Memory for O
+    // - Call the kernel (only for floating types)
+    // - return {O}
+		const auto B = I.size(0);    // batch size
+		const auto I_C = I.size(1);    // channel size
+		const auto I_H = I.size(2);    // input height
+		const auto I_W = I.size(3);     // input width
+		const auto F = w_c.size(1);     // number of filters
+
+		auto O = torch::empty({B, F, I_H - 2, I_W - 2}, I.options());
+
+		const dim3 block_dim(16, 16, 1);
+		const dim3 grid_dim((I_W+15)/16, (I_H+15)/16, B);
+
+		AT_DISPATCH_FLOATING_TYPES(
+		      I.type(), "center_surround_convolution_forward_kernel", ([&] {
+				center_surround_convolution_forward_kernel<scalar_t><<<grid_dim, block_dim>>>(
+		            I.packed_accessor32<scalar_t, 4, torch::RestrictPtrTraits>(),
+		            w_c.packed_accessor32<scalar_t, 2, torch::RestrictPtrTraits>(),
+		            w_s.packed_accessor32<scalar_t, 2, torch::RestrictPtrTraits>(),
+		            w_b.packed_accessor32<scalar_t, 1, torch::RestrictPtrTraits>(),
+		            O.packed_accessor32<scalar_t, 4, torch::RestrictPtrTraits>());
+		      }));
+		return {O};
+
+//		return {I.slice(2, 1, -1, 1).slice(3, 1, -1, 1)};
+}
+
+/** d)
+ *  - Write a c++ function that allocates tensors for the derivatives and calls
+ *  the kernels to compute
+ *  their content.
+ */
+std::vector<torch::Tensor> center_surround_convolution_backward (
+        torch::Tensor dL_dO,
+        torch::Tensor I,
+        torch::Tensor w_c,
+        torch::Tensor w_s,
+        torch::Tensor w_b) {
+    // TODO Use the backward kernels to compute the derivatives
+    // - Check inputs
+    // - Allocate memory for dL_dI, dL_dw_c, dL_dw_s and dL_dw_b
+    // - Call the kernels with correct grid and block sizes
+    // - return {dL_dI, dL_dw_c, dL_dw_s, dL_dw_b};
+
+	// XXX: Use this padded version of dL_dO to compute dL_dI
+		auto dL_dO_padded = torch::constant_pad_nd(dL_dO, torch::IntList({2, 2, 2, 2}), 0);
+
+		auto dL_dI = torch::empty_like(I);   // Create uninitialized tensors for the computed derivatives
+		auto dL_dw_s = torch::empty_like(w_s);
+		auto dL_dw_c = torch::empty_like(w_c);
+		auto dL_dw_b = torch::empty_like(w_b);
+
+		const auto I_B = I.size(0);
+		const auto I_C = I.size(1);
+		const auto I_H = I.size(2);
+		const auto I_W = I.size(3);
+		const auto O_C = w_s.size(1);
+
+		auto O_dL_dw_b = torch::empty({O_C}, dL_dw_b.options());
+		auto O_dL_dw_c = torch::empty({I_C, O_C}, dL_dw_c.options());
+		auto O_dL_dw_s = torch::empty({I_C, O_C}, dL_dw_s.options());
+		auto O_dL_dI = torch::empty({I_B, I_C, I_H, I_W}, dL_dI.options());
+
+		const dim3 block_dim(8, 8, 1);
+		const dim3 grid_dim((I_W+7)/8, (I_H+7)/8, O_C);
+
+		AT_DISPATCH_FLOATING_TYPES(
+				I.type(), "dL_dw_b_kernel", ([&] {
+				dL_dw_b_kernel<scalar_t><<<grid_dim, block_dim>>>(
+					dL_dO.packed_accessor32<scalar_t, 4, torch::RestrictPtrTraits>(),
+					O_dL_dw_b.packed_accessor32<scalar_t, 1, torch::RestrictPtrTraits>());
+			  }));
+
+		AT_DISPATCH_FLOATING_TYPES(
+			  I.type(), "dL_dw_kernel", ([&] {
+				dL_dw_kernel<scalar_t><<<grid_dim, block_dim>>>(
+					dL_dO.packed_accessor32<scalar_t, 4, torch::RestrictPtrTraits>(),
+					I.packed_accessor32<scalar_t, 4, torch::RestrictPtrTraits>(),
+					O_dL_dw_c.packed_accessor32<scalar_t, 2, torch::RestrictPtrTraits>(),
+					O_dL_dw_s.packed_accessor32<scalar_t, 2, torch::RestrictPtrTraits>());
+			  }));
+
+		grid_dim((I_W+7)/8, (I_H+7)/8, I_B);
+
+		AT_DISPATCH_FLOATING_TYPES(
+			  I.type(), "dL_dI_kernel", ([&] {
+				dL_dI_kernel<scalar_t><<<grid_dim, block_dim>>>(
+					dL_dO_padded.packed_accessor32<scalar_t, 4, torch::RestrictPtrTraits>(),
+					w_c.packed_accessor32<scalar_t, 2, torch::RestrictPtrTraits>(),
+					w_s.packed_accessor32<scalar_t, 2, torch::RestrictPtrTraits>(),
+					O_dL_dI.packed_accessor32<scalar_t, 4, torch::RestrictPtrTraits>());
+			  }));
+
+		return {O_dL_dI, O_dL_dw_c, O_dL_dw_s, O_dL_dw_b};
+//	return {I, w_c, w_s, w_b};
+}
+
+/** c) & d)
+ * Export your c++ function to a python module. Call the exported function
+ * forward / backward.
+ */
+PYBIND11_MODULE(TORCH_EXTENSION_NAME, m) {
+    m.def("forward", &center_surround_convolution_forward,
+            "Center-Surround-Convolution TODO documentation string");
+    m.def("backward", &center_surround_convolution_backward,
+            "Center-Surround-Convolution TODO documentation string");
+}

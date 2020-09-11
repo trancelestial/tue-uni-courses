@@ -1,0 +1,6 @@
+12:29:31 **** Incremental Build of configuration Default for project reverseArray ****
+make dbg=1 all 
+make: Nothing to be done for 'all'.
+
+12:29:31 Build Finished (took 60ms)
+

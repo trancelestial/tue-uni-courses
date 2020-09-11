@@ -1,0 +1,7 @@
+19:27:45 **** Clean-only build of configuration Default for project upload ****
+make clean 
+rm -f   testDotProductStreams.o
+rm -f testDotProductStreams
+
+19:27:45 Build Finished (took 67ms)
+

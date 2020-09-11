@@ -1,0 +1,27 @@
+20:52:24 **** Incremental Build of configuration Debug for project NBody ****
+make all 
+Building file: ../main.cu
+Invoking: NVCC Compiler
+/usr/local/cuda-10.2/bin/nvcc -G -g -O0 -gencode arch=compute_61,code=sm_61  -odir "." -M -o "main.d" "../main.cu"
+/usr/local/cuda-10.2/bin/nvcc -G -g -O0 --compile --relocatable-device-code=false -gencode arch=compute_61,code=compute_61 -gencode arch=compute_61,code=sm_61  -x cu -o  "main.o" "../main.cu"
+../main.cu(59): warning: extern declaration of the entity sharedPositions is treated as a static definition
+
+../main.cu(60): warning: extern declaration of the entity sharedMasses is treated as a static definition
+
+../main.cu: In function ‘int main(int, char**)’:
+../main.cu:188:23: warning: ‘cudaError_t cudaThreadSynchronize()’ is deprecated [-Wdeprecated-declarations]
+   cudaThreadSynchronize();
+                       ^
+/usr/local/cuda-10.2/bin/../targets/x86_64-linux/include/cuda_runtime_api.h:957:46: note: declared here
+ extern __CUDA_DEPRECATED __host__ cudaError_t CUDARTAPI cudaThreadSynchronize(void);
+                                              ^~~~~~~~~~~~~~~~~~~~~
+Finished building: ../main.cu
+ 
+Building target: NBody
+Invoking: NVCC Linker
+/usr/local/cuda-10.2/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_61,code=compute_61 -gencode arch=compute_61,code=sm_61 -link -o  "NBody"  ./gltools.o ./main.o  ./.metadata/.plugins/org.eclipse.cdt.make.core/specs.o   -lGL -lX11
+Finished building target: NBody
+ 
+
+20:52:26 Build Finished (took 1s.865ms)
+

@@ -1,0 +1,7 @@
+19:27:45 **** Clean-only build of configuration Default for project crossCorrelation ****
+make clean 
+rm -f PPM.o  testCorrelation.o
+rm -f testCorrelation
+
+19:27:45 Build Finished (took 72ms)
+

@@ -1,0 +1,8 @@
+19:21:38 **** Incremental Build of configuration Default for project prefix ****
+make dbg=1 all 
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o testPrefix.o -c testPrefix.cu
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o testPrefix.o.ptx -ptx testPrefix.cu
+g++ -fPIC -o testPrefix PPM.o  testPrefix.o -L/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/lib64 -lcudart
+
+19:21:40 Build Finished (took 1s.863ms)
+

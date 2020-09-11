@@ -1,0 +1,16 @@
+20:14:51 **** Build of configuration Release for project MatrixMul ****
+make all 
+Building file: ../main.cu
+Invoking: NVCC Compiler
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc -O3 -ccbin g++-6 -gencode arch=compute_75,code=sm_75  -odir "." -M -o "main.d" "../main.cu"
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc -O3 -ccbin g++-6 --compile --relocatable-device-code=false -gencode arch=compute_75,code=compute_75 -gencode arch=compute_75,code=sm_75  -x cu -o  "main.o" "../main.cu"
+Finished building: ../main.cu
+ 
+Building target: MatrixMul
+Invoking: NVCC Linker
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc --cudart static --relocatable-device-code=false -gencode arch=compute_75,code=compute_75 -gencode arch=compute_75,code=sm_75 -link -o  "MatrixMul"  ./main.o   
+Finished building target: MatrixMul
+ 
+
+20:14:53 Build Finished (took 2s.416ms)
+

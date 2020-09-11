@@ -1,0 +1,79 @@
+14:51:17 **** Build of configuration Default for project CellPhoneCoverage ****
+make dbg=1 all 
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o CellPhoneCoverage.o -c CellPhoneCoverage.cu
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o CellPhoneCoverage.o.ptx -ptx CellPhoneCoverage.cu
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o SignalStrengthsCuda.o -c SignalStrengthsCuda.cu
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o SignalStrengthsCuda.o.ptx -ptx SignalStrengthsCuda.cu
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o SignalStrengthsSortedCuda.o -c SignalStrengthsSortedCuda.cu
+SignalStrengthsSortedCuda.cu(34): warning: function "noSortKernel" was declared but never referenced
+
+SignalStrengthsSortedCuda.cu(71): warning: function "xmaxKernel" was declared but never referenced
+
+SignalStrengthsSortedCuda.cu(105): warning: function "ymaxKernel" was declared but never referenced
+
+SignalStrengthsSortedCuda.cu(122): warning: function "yminKernel" was declared but never referenced
+
+SignalStrengthsSortedCuda.cu(139): warning: function "maxKernelReduce" was declared but never referenced
+
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o SignalStrengthsSortedCuda.o.ptx -ptx SignalStrengthsSortedCuda.cu
+SignalStrengthsSortedCuda.cu(34): warning: function "noSortKernel" was declared but never referenced
+
+SignalStrengthsSortedCuda.cu(71): warning: function "xmaxKernel" was declared but never referenced
+
+SignalStrengthsSortedCuda.cu(105): warning: function "ymaxKernel" was declared but never referenced
+
+SignalStrengthsSortedCuda.cu(122): warning: function "yminKernel" was declared but never referenced
+
+SignalStrengthsSortedCuda.cu(139): warning: function "maxKernelReduce" was declared but never referenced
+
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o SignalStrengthsCpu.o -c SignalStrengthsCpu.cu
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o SignalStrengthsCpu.o.ptx -ptx SignalStrengthsCpu.cu
+g++ -fPIC -o CellPhoneCoverage   CellPhoneCoverage.o SignalStrengthsCuda.o SignalStrengthsSortedCuda.o SignalStrengthsCpu.o -L/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/lib64 -lcudart
+14:51:49 **** Incremental Build of configuration Default for project CellPhoneCoverage ****
+make dbg=1 all 
+make: Nothing to be done for 'all'.
+14:52:39 **** Incremental Build of configuration Default for project CellPhoneCoverage ****
+make dbg=1 all 
+make: Nothing to be done for 'all'.
+14:55:22 **** Incremental Build of configuration Default for project CellPhoneCoverage ****
+make dbg=1 all 
+make: Nothing to be done for 'all'.
+15:20:30 **** Incremental Build of configuration Default for project CellPhoneCoverage ****
+make dbg=1 all 
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o SignalStrengthsSortedCuda.o -c SignalStrengthsSortedCuda.cu
+SignalStrengthsSortedCuda.cu(34): warning: function "noSortKernel" was declared but never referenced
+
+SignalStrengthsSortedCuda.cu(114): warning: function "ymaxKernel" was declared but never referenced
+
+SignalStrengthsSortedCuda.cu(131): warning: function "yminKernel" was declared but never referenced
+
+SignalStrengthsSortedCuda.cu(168): warning: function "minKernelReduce" was declared but never referenced
+
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o SignalStrengthsSortedCuda.o.ptx -ptx SignalStrengthsSortedCuda.cu
+SignalStrengthsSortedCuda.cu(34): warning: function "noSortKernel" was declared but never referenced
+
+SignalStrengthsSortedCuda.cu(114): warning: function "ymaxKernel" was declared but never referenced
+
+SignalStrengthsSortedCuda.cu(131): warning: function "yminKernel" was declared but never referenced
+
+SignalStrengthsSortedCuda.cu(168): warning: function "minKernelReduce" was declared but never referenced
+
+g++ -fPIC -o CellPhoneCoverage   CellPhoneCoverage.o SignalStrengthsCuda.o SignalStrengthsSortedCuda.o SignalStrengthsCpu.o -L/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/lib64 -lcudart
+16:12:27 **** Incremental Build of configuration Default for project CellPhoneCoverage ****
+make dbg=1 all 
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o SignalStrengthsSortedCuda.o -c SignalStrengthsSortedCuda.cu
+SignalStrengthsSortedCuda.cu(34): warning: function "noSortKernel" was declared but never referenced
+
+/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/bin/nvcc  -arch sm_75 -I/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/include -D_DEBUG -G -Xcompiler "-gdwarf-3" -g -o SignalStrengthsSortedCuda.o.ptx -ptx SignalStrengthsSortedCuda.cu
+SignalStrengthsSortedCuda.cu(34): warning: function "noSortKernel" was declared but never referenced
+
+g++ -fPIC -o CellPhoneCoverage   CellPhoneCoverage.o SignalStrengthsCuda.o SignalStrengthsSortedCuda.o SignalStrengthsCpu.o -L/graphics/opt/opt_Ubuntu18.04/cuda/toolkit_10.1/cuda/lib64 -lcudart
+19:40:36 **** Incremental Build of configuration Default for project CellPhoneCoverage ****
+make dbg=1 all 
+make: Nothing to be done for 'all'.
+19:41:41 **** Incremental Build of configuration Default for project CellPhoneCoverage ****
+make dbg=1 all 
+make: Nothing to be done for 'all'.
+19:41:49 **** Incremental Build of configuration Default for project CellPhoneCoverage ****
+make dbg=1 all 
+make: Nothing to be done for 'all'.
